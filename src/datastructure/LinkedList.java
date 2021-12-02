@@ -16,6 +16,12 @@ public class LinkedList<T> {
         end=root;
         length=1;
     }
+    public T getRootData(){
+        return this.root.data;
+    }
+    public int length(){
+        return length;
+    }
     public Node get(int pos){
         Node temp=root;
         if(pos<=0){
@@ -30,8 +36,9 @@ public class LinkedList<T> {
     }
     public Node insert(int pos,T data) throws DataSafetyException {
         length++;
-        this.get(pos);
-        return new Node(this.get(pos),data);
+        Node node=new Node(this.get(pos),data);
+        end=node;
+        return node;
     }
     public Node delete(int pos) throws DataSafetyException {
         Node deleted=this.get(pos);
@@ -60,7 +67,7 @@ public class LinkedList<T> {
     }
     public void printAll(){
         Node temp=root;
-        while(temp.next!=null){
+        while(temp!=null){
             System.out.println(temp.data.toString());
             temp=temp.next;
         }
@@ -80,6 +87,7 @@ public class LinkedList<T> {
             } else if(frontNode.next!=null){
                 throw new DataSafetyException("该节点节点引用不为null");
             }
+            this.data=data;
             frontNode.next=this;
             front=frontNode;
         }

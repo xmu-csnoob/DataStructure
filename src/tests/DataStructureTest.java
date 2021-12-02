@@ -21,6 +21,11 @@ public class DataStructureTest {
         Generator generator=new Generator();
         LinkedList<Person> list=new LinkedList<Person>(generator.getRandomPerson());
         list.insert(1,generator.getRandomPerson());
+        list.insert(2,generator.getRandomPerson());
+        list.delete(1);
+        list.append(generator.getRandomPerson());
         list.printAll();
+        System.out.println("ROOT = " + list.getRootData());
+        System.out.println("LENGTH = " + list.length());
     }
 }
