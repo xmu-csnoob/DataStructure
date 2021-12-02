@@ -7,7 +7,7 @@ import exception.DataSafetyException;
  * @author Wenfei Wang
  * 下标从1开始
  */
-public class LinkedList<T> {
+public class LinkedList<T> implements DataStructure{
     Node root;
     int length;
     Node end;
@@ -65,6 +65,7 @@ public class LinkedList<T> {
         end=node;
         return node;
     }
+    @Override
     public void printAll(){
         Node temp=root;
         while(temp!=null){

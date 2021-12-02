@@ -5,16 +5,15 @@ package datastructure;
  * @author Wenfei Wang
  * 下标从1开始
  */
-public class LinearList<T>{
+public class LinearList<T> implements DataStructure{
     public int length;
     private Object[] list;
     public LinearList(T[] arr){
         length=arr.length;
-
         list=arr;
     }
     public LinearList(int maxLength){
-        list=new Object[maxLength];
+        list=new Object[maxLength+1];
         length=maxLength;
     }
     public T getEleAt(int pos)throws ClassCastException{
@@ -44,5 +43,12 @@ public class LinearList<T>{
             }
         }
         return -1;
+    }
+    @Override
+    public void printAll() {
+        for (int i = 1; i < list.length; i++) {
+            System.out.print(list[i] + " ");
+        }
+        System.out.println("");
     }
 }
