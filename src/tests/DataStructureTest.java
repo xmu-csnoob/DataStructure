@@ -51,4 +51,11 @@ public class DataStructureTest {
         System.out.println("DEQUEUE = " + queue.deQueue());
         queue.printAll();
     }
+    public void binaryTreeTest(){
+        Generator generator=new Generator();
+        BinaryTree<Person> binaryTree=new BinaryTree<Person>(generator.getRandomPerson());
+        binaryTree.generateExample(generator.getRandomPerson());
+        System.out.println(binaryTree.getDepth(binaryTree.getRoot()));
+        binaryTree.DFS(binaryTree.getRoot(),1);
+    }
 }
