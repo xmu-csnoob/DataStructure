@@ -1,9 +1,6 @@
 package tests;
 
-import datastructure.DataStructure;
-import datastructure.LinearList;
-import datastructure.LinkedList;
-import datastructure.Stack;
+import datastructure.*;
 import examples.Person;
 import exception.DataSafetyException;
 import utils.Generator;
@@ -43,5 +40,15 @@ public class DataStructureTest {
         System.out.println("POPPED = " + stack.pop());
         stack.printAll();
         System.out.println("TOP = " + stack.top());
+    }
+    public void queueTest() throws DataSafetyException {
+        Generator generator=new Generator();
+        Queue<Person> queue=new Queue<Person>(10);
+        for(int i=0;i<5;i++){
+            queue.enQueue(generator.getRandomPerson());
+        }
+        queue.printAll();
+        System.out.println("DEQUEUE = " + queue.deQueue());
+        queue.printAll();
     }
 }
