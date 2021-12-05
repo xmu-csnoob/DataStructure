@@ -73,5 +73,9 @@ public class DataStructureTest {
         graph.addNode(person4);
         graph.linkNodes(person4,person1,10);
         graph.showMatrix();
+        System.out.println("-------------DFS-------------");
+        graph.dfs(1);
+        System.out.println("-------------BFS-------------");
+        graph.bfs(1);
     }
 }

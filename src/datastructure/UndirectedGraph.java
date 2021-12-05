@@ -3,7 +3,10 @@ package datastructure;
 import exception.DataSafetyException;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
 
 /**
  * @author Wenfei Wang
@@ -12,6 +15,7 @@ public class UndirectedGraph<T> {
     List<Node> nodes;
     List<Route> routes;
     int[][] matrix;
+    boolean[] visited;
     public UndirectedGraph(T data){
         nodes=new ArrayList<>();
         routes=new ArrayList<>();
@@ -59,6 +63,18 @@ public class UndirectedGraph<T> {
         generateMatrix();
         return node;
     }
+    public List<Node> getNeighbors(Node node){
+        List<Node> list=new ArrayList<>();
+        for(Route route:routes){
+            if(route.firstNode.id==node.id){
+                list.add(route.secondNode);
+            }
+            if(route.secondNode.id==node.id){
+                list.add(route.firstNode);
+            }
+        }
+        return list;
+    }
     public Node addNode(T inserted,T target,int distance){
         Node node=new Node(inserted,nodes.toArray().length+1);
         Node targetNode=this.findNode(target);
@@ -69,6 +85,14 @@ public class UndirectedGraph<T> {
         node.degree++;
         generateMatrix();
         return node;
+    }
+    public Node getNodeById(int id){
+        for(Node node:nodes){
+            if(node.id==id){
+                return node;
+            }
+        }
+        return null;
     }
     public Route linkNodes(T var1,T var2,int distance) throws DataSafetyException {
         if(var1==var2){
@@ -85,6 +109,48 @@ public class UndirectedGraph<T> {
         node2.degree++;
         generateMatrix();
         return route;
+    }
+    public boolean isAllVisited(){
+        for(boolean bool:visited){
+            if(!bool) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public void dfs(int id){
+        visited=new boolean[nodes.toArray().length];
+        Stack<Node> stack=new Stack<>();
+        stack.push(getNodeById(1));
+        visited[0]=true;
+        while(!stack.empty()){
+            Node temp=stack.pop();
+            System.out.println(temp.id);
+            visited[temp.id-1]=true;
+            List<Node> list=this.getNeighbors(temp);
+            for(Node n:list){
+                if(!visited[n.id-1]){
+                    stack.push(n);
+                }
+            }
+        }
+    }
+    public void bfs(int id){
+        visited=new boolean[nodes.toArray().length];
+        Queue<Node> queue=new LinkedList<>();
+        queue.offer(getNodeById(id));
+        visited[0]=true;
+        while(!queue.isEmpty()){
+            Node temp=queue.poll();
+            System.out.println(temp.id);
+            visited[temp.id-1]=true;
+            List<Node> list=this.getNeighbors(temp);
+            for(Node n:list){
+                if(!visited[n.id-1]){
+                    queue.offer(n);
+                }
+            }
+        }
     }
     private class Node{
         T value;
