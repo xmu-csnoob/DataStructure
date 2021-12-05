@@ -5,6 +5,7 @@ import utils.Generator;
 import java.util.ArrayDeque;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * @author Wenfei Wang
@@ -33,6 +34,20 @@ public class BinaryTree<T> {
             System.out.println(dfsRecord+":"+node.data);
             dfs(node.leftChild,dfsRecord+1);
             dfs(node.rightChild,dfsRecord+1);
+        }
+    }
+    public void dfs(Node node){
+        Stack<Node> stack=new Stack<>();
+        stack.push(node);
+        while(!stack.empty()){
+            Node temp=stack.pop();
+            System.out.println(temp.data);
+            if(temp.leftChild!=null){
+                stack.push(temp.leftChild);
+            }
+            if(temp.rightChild!=null){
+                stack.push(temp.rightChild);
+            }
         }
     }
     public void bfs(Node node){
