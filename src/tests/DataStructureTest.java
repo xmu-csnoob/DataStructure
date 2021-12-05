@@ -56,6 +56,22 @@ public class DataStructureTest {
         BinaryTree<Person> binaryTree=new BinaryTree<Person>(generator.getRandomPerson());
         binaryTree.generateExample(generator.getRandomPerson());
         System.out.println(binaryTree.getDepth(binaryTree.getRoot()));
-        binaryTree.DFS(binaryTree.getRoot(),1);
+        System.out.println("-------------DFS-------------");
+        binaryTree.dfs(binaryTree.getRoot(),1);
+        System.out.println("-------------BFS-------------");
+        binaryTree.bfs(binaryTree.getRoot());
+    }
+    public void undirectedGraghTest() throws DataSafetyException {
+        Generator generator=new Generator();
+        Person person1=generator.getRandomPerson();
+        Person person2=generator.getRandomPerson();
+        Person person3=generator.getRandomPerson();
+        Person person4=generator.getRandomPerson();
+        UndirectedGraph<Person> graph=new UndirectedGraph<>(person1);
+        graph.addNode(person2,person1,4);
+        graph.addNode(person3,person2,3);
+        graph.addNode(person4);
+        graph.linkNodes(person4,person1,10);
+        graph.showMatrix();
     }
 }

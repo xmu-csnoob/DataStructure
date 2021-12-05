@@ -2,11 +2,15 @@ package datastructure;
 
 import utils.Generator;
 
+import java.util.ArrayDeque;
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * @author Wenfei Wang
  */
 public class BinaryTree<T> {
-    private Node root;
+    private final Node root;
     private int depth;
     private int dfsRecord;
     public BinaryTree(T data){
@@ -24,11 +28,25 @@ public class BinaryTree<T> {
     public Node getRoot(){
         return root;
     }
-    public void DFS(Node node,int dfsRecord){
+    public void dfs(Node node,int dfsRecord){
         if(node!=null){
             System.out.println(dfsRecord+":"+node.data);
-            DFS(node.leftChild,dfsRecord+1);
-            DFS(node.rightChild,dfsRecord+1);
+            dfs(node.leftChild,dfsRecord+1);
+            dfs(node.rightChild,dfsRecord+1);
+        }
+    }
+    public void bfs(Node node){
+        Queue<Node> queue=new LinkedList<Node>();
+        queue.offer(node);
+        while(!queue.isEmpty()){
+            Node temp=queue.poll();
+            if(temp.leftChild!=null){
+                queue.offer(temp.leftChild);
+            }
+            if(temp.rightChild!=null){
+                queue.offer(temp.rightChild);
+            }
+            System.out.println(temp.data);
         }
     }
     public void generateExample(T data){
@@ -61,6 +79,5 @@ public class BinaryTree<T> {
         protected T getData(){
             return data;
         }
-
     }
 }
