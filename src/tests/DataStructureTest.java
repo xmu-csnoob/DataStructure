@@ -57,25 +57,37 @@ public class DataStructureTest {
         binaryTree.generateExample(generator.getRandomPerson());
         System.out.println(binaryTree.getDepth(binaryTree.getRoot()));
         System.out.println("-------------DFS-------------");
-        binaryTree.dfs(binaryTree.getRoot(),1);
+        binaryTree.dfs(binaryTree.getRoot());
         System.out.println("-------------BFS-------------");
         binaryTree.bfs(binaryTree.getRoot());
     }
     public void undirectedGraghTest() throws DataSafetyException {
         Generator generator=new Generator();
-        Person person1=generator.getRandomPerson();
-        Person person2=generator.getRandomPerson();
-        Person person3=generator.getRandomPerson();
-        Person person4=generator.getRandomPerson();
-        UndirectedGraph<Person> graph=new UndirectedGraph<>(person1);
-        graph.addNode(person2,person1,4);
-        graph.addNode(person3,person2,3);
-        graph.addNode(person4);
-        graph.linkNodes(person4,person1,10);
+        Person[] people=new Person[10];
+        for(int i=0;i<10;i++){
+            people[i]=generator.getRandomPerson();
+        }
+        UndirectedGraph<Person> graph=new UndirectedGraph<>(people[0]);
+        for(int i=1;i<6;i++) {
+            graph.addNode(people[i]);
+        }
+        graph.linkNodes(1,2,1);
+        graph.linkNodes(1,3,2);
+        graph.linkNodes(2,3,6);
+        graph.linkNodes(2,4,11);
+        graph.linkNodes(3,4,9);
+        graph.linkNodes(3,5,13);
+        graph.linkNodes(4,5,7);
+        graph.linkNodes(4,6,3);
+        graph.linkNodes(5,6,4);
         graph.showMatrix();
         System.out.println("-------------DFS-------------");
         graph.dfs(1);
         System.out.println("-------------BFS-------------");
         graph.bfs(1);
+        graph.printAll();
+        System.out.println("-------------SPANNING TREE-------------");
+        UndirectedGraph<Person> spanningTree=graph.getSpanningTree();
+        spanningTree.printAll();
     }
 }

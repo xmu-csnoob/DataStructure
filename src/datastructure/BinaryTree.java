@@ -15,7 +15,7 @@ public class BinaryTree<T> {
     private int depth;
     private int dfsRecord;
     public BinaryTree(T data){
-        root=new Node(data);
+        root=new Node(data,1);
     }
     public T getRootData(){
         return root.getData();
@@ -31,7 +31,7 @@ public class BinaryTree<T> {
     }
     public void dfs(Node node,int dfsRecord){
         if(node!=null){
-            System.out.println(dfsRecord+":"+node.data);
+            System.out.println(node.id);
             dfs(node.leftChild,dfsRecord+1);
             dfs(node.rightChild,dfsRecord+1);
         }
@@ -41,7 +41,7 @@ public class BinaryTree<T> {
         stack.push(node);
         while(!stack.empty()){
             Node temp=stack.pop();
-            System.out.println(temp.data);
+            System.out.println(temp.id);
             if(temp.leftChild!=null){
                 stack.push(temp.leftChild);
             }
@@ -61,20 +61,23 @@ public class BinaryTree<T> {
             if(temp.rightChild!=null){
                 queue.offer(temp.rightChild);
             }
-            System.out.println(temp.data);
+            System.out.println(temp.id);
         }
     }
     public void generateExample(T data){
-        root.setLeftChild(new Node(data));
-        root.setRightChild(new Node(data));
-        root.getLeftChild().setLeftChild(new Node(data));
+        root.setLeftChild(new Node(data,2));
+        root.setRightChild(new Node(data,3));
+        root.getLeftChild().setLeftChild(new Node(data,4));
     }
     private class Node{
         T data;
+        int id;
         Node leftChild;
         Node rightChild;
-        protected Node(T data){
+        protected Node(T data,int id)
+        {
             this.data=data;
+            this.id=id;
         }
         protected void setLeftChild(Node leftChild){
             this.leftChild=leftChild;
